@@ -1,2 +1,2 @@
 # POO
-Exercícios de lista
+Exercícios de Programação Orientada a Objetos
