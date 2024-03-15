@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Ex1 {
-    private class TAluno{
+    private class TAluno {
         String nome;
         int idade;
         String endereco;
