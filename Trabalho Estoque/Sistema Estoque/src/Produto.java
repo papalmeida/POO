@@ -1,42 +1,42 @@
 public class Produto {
-    int codigo;
+    int codigo; //auto gerado
     String nome;
     String marca;
-    float preco;
-    int quantidade;
+    double preco;
+    int qntdEstoque;
 
-    void addCodigo(int codigo) {
-        this.codigo = codigo;
-    }
     int getCodigo() {
         return codigo;
     }
-    
-    void addNome(String nome) {
-        this.nome = nome;
+    void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
+
     String getNome() {
         return nome;
     }
-    
-    void addMarca(String marca) {
-        this.marca = marca;
+    void setNome(String nome) {
+        this.nome = nome;
     }
+
     String getMarca() {
         return marca;
     }
-
-    void addPreco(float preco) {
-        this.preco = preco;
+    void setMarca(String marca) {
+        this.marca = marca;
     }
-    float getPreco() {
+
+    double getPreco() {
         return preco;
     }
-
-    void addQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    void setPreco(double preco) {
+        this.preco = preco;
     }
-    int getQuantidade() {
-        return quantidade;
+    
+    int getQntdEstoque() {
+        return qntdEstoque;
+    }
+    void setQntdEstoque(int qntdEstoque) {
+        this.qntdEstoque = qntdEstoque;
     }
 }
