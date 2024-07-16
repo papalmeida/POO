@@ -1,11 +1,10 @@
 public class Estoque {
     Produto[] produtos = new Produto[10];
     int nProdutos = 0;
-    int codigo = 1;
+    int codigo = 0;
 
-    boolean inserir(Produto novoProduto) {
-        if (novoProduto != null) {
-            /* Verificar se a lista de produtos está cheia */
+    boolean inserir(Produto produto) {
+        if (produto != null) {
             if (nProdutos == produtos.length) {
                 Produto[] vetAux = new Produto[nProdutos * 2];
                 for (int i = 0; i < nProdutos; i++) {
@@ -13,31 +12,59 @@ public class Estoque {
                 }
                 produtos = vetAux;
             }
-            for (int i = 0; i < produtos.length; i++) {
-                if (produtos[i] == null) {
-                    produtos[i] = new Produto();
+            if (produtos[nProdutos] == null) {
+                produtos[nProdutos] = new Produto();
 
-                    produtos[i].addCodigo(codigo);
-                    produtos[i].addNome(novoProduto.getNome());
-                    produtos[i].addMarca(novoProduto.getMarca());
-                    produtos[i].addPreco(novoProduto.getPreco());
-                    produtos[i].addQuantidade(novoProduto.getQuantidade());
+                produtos[nProdutos].setCodigo(this.codigo);
+                produtos[nProdutos].setNome(produto.getNome());
+                produtos[nProdutos].setMarca(produto.getMarca());
+                produtos[nProdutos].setPreco(produto.getPreco());
+                produtos[nProdutos].setQntdEstoque(produto.getQntdEstoque());
 
-                    codigo++;
-                    nProdutos++;
+                this.codigo++;
+                nProdutos++;
+                return true;
+            }
+        }
+        return true;
+    }
+
+    boolean excluir(int codigo) {
+        if (codigo > 0) {
+            for (int i = 0; i < nProdutos; i++) {
+                if (produtos[i].getCodigo() == codigo) {
+                    for (int j = 0; j < produtos.length - 1; j++) {
+                        produtos[j] = produtos[j + 1];
+                    }
+                    nProdutos--;
+                    produtos[nProdutos] = null;
                     return true;
                 }
             }
-            return false;
         }
         return false;
     }
 
-    boolean verificarNome(String nome) {
+    boolean alterar(Produto produto) {
+        return true;
+    }
+
+    Produto buscar(int codigo) {
+        return null;
+    }
+
+    Produto[] listarTodos() {
+        return a;
+    }
+
+    Produto[] listarPorNome() {
+        return b;
+    }
+
+    private boolean produtoIgual(Produto novoProduto) {
         for (int i = 0; i < nProdutos; i++) {
-            if (produtos[i].nome.equalsIgnoreCase(nome)) {
+            if (produtos[i].nome.equalsIgnoreCase(novoProduto.nome))
                 return true;
-            } 
         }
         return false;
     }
