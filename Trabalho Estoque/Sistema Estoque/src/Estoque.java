@@ -1,8 +1,9 @@
 public class Estoque {
     Produto[] produtos = new Produto[10];
     int nProdutos = 0;
-    int codigo = 0;
+    int codigo = 1;
 
+    //Inserir novo produto
     boolean inserir(Produto produto) {
         if (produto != null) {
             if (nProdutos == produtos.length) {
@@ -12,18 +13,22 @@ public class Estoque {
                 }
                 produtos = vetAux;
             }
-            if (produtos[nProdutos] == null) {
-                produtos[nProdutos] = new Produto();
-
-                produtos[nProdutos].setCodigo(this.codigo);
-                produtos[nProdutos].setNome(produto.getNome());
-                produtos[nProdutos].setMarca(produto.getMarca());
-                produtos[nProdutos].setPreco(produto.getPreco());
-                produtos[nProdutos].setQntdEstoque(produto.getQntdEstoque());
-
-                this.codigo++;
-                nProdutos++;
-                return true;
+            if (!nomeIgual(produto)) {
+                for (int i = 0; i < produtos.length; i++) {
+                    if (produtos[nProdutos] == null) {
+                        produtos[nProdutos] = new Produto();
+        
+                        produtos[nProdutos].setCodigo(this.codigo);
+                        produtos[nProdutos].setNome(produto.getNome());
+                        produtos[nProdutos].setMarca(produto.getMarca());
+                        produtos[nProdutos].setPreco(produto.getPreco());
+                        produtos[nProdutos].setQntdEstoque(produto.getQntdEstoque());
+        
+                        codigo++;
+                        nProdutos++;
+                        return true;
+                    }
+                }
             }
         }
         return true;
@@ -53,7 +58,7 @@ public class Estoque {
         return null;
     }
 
-    Produto[] listar() {
+    Produto[] listarTodos() {
         Produto[] vetAux = new Produto[nProdutos];
         for (int i = 0; i < nProdutos; i++) {
             vetAux[i] = new Produto();
@@ -66,13 +71,14 @@ public class Estoque {
         return vetAux;
     }
 
-    // Produto[] listarPorNome() {
-    //     return b;
-    // }
+    Produto[] listarPorNome() {
+        Produto[] vetAux = ordenarProdutos();
+        return vetAux;
+    }
 
-    private boolean produtoIgual(Produto novoProduto) {
+    private boolean nomeIgual(Produto produto) {
         for (int i = 0; i < nProdutos; i++) {
-            if (produtos[i].nome.equalsIgnoreCase(novoProduto.nome))
+            if (produtos[i].nome.equalsIgnoreCase(produto.nome))
                 return true;
         }
         return false;
@@ -90,5 +96,20 @@ public class Estoque {
 
     int getNProdutos() {
         return nProdutos;
+    }
+
+    private Produto[] ordenarProdutos() {
+        Produto auxProtudo = new Produto();
+        Produto[] vetAux = listarTodos();
+        for (int i = 0; i < nProdutos; i++) {
+            for (int j = i + 1; j < nProdutos; j++) {
+                if ((vetAux[i].getNome()).compareToIgnoreCase(vetAux[j].getNome()) > 0) {
+                    auxProtudo = vetAux[i];
+                    vetAux[i] = vetAux[j];
+                    vetAux[j] = auxProtudo;
+                }
+            }
+        }
+        return vetAux;
     }
 }
